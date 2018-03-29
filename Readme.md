@@ -1,3 +1,7 @@
+README
+
+Live: https://mc-weather.herokuapp.com/
+
 Momentum Cloud Weather Test
 ---- Test requirements ----
 These are the things we'd like to see when reviewing your code
