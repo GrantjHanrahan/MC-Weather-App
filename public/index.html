@@ -1,0 +1,262 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+  <style type="text/scss" id="sass-source">
+    $bad: red; $good: blue; h1 { color: $good; } .replace-me { color: $bad; text-decoration: line-through; }
+  </style>
+  <style type="text/css" id="sass-target">
+    /* don't edit this, it will be overwritten with the compiled SASS content */
+  </style>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.10.7/sass.sync.js" integrity="sha256-HD/Y9K+L24Si3nWG5e4B5t3/7sKPhZcJY4jmjnyvY6Y=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    // simple client side SASS compilation
+    var scss = document.getElementById('sass-source').innerHTML
+    Sass.compile(scss, function(result) {
+      if (!result.status) {
+        document.getElementById('sass-target').innerHTML = result.text;
+      } else {
+        console.error(result.formatted)
+      }
+    });
+  </script>
+<script type="text/javascript">
+  const app = angular.module('mcWeatherTestApp', []);
+  app.controller('mcWeatherTestController', function($scope, $http){
+    $scope.testIsDone = true;
+    $scope.items = {};
+    $scope.assetName = '';
+    $scope.countryCode = '';
+    $scope.totalCount = 0;
+    $scope.searchWeather = function() {
+      let searchCity = $scope.assetName;
+      let searchCountry = $scope.countryCode;
+      let apiKey = '8d1194589041958e3246e9d8334d1a8c';
+      $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + searchCity + ',' + searchCountry + '&units=metric&APPID='+ apiKey).then(function(data) {
+        $scope.city = data.data.name;
+        $scope.country = data.data.sys.country;
+        $scope.temp = data.data.main.temp;
+        $scope.main = data.data.weather[0].main;
+        $scope.description = data.data.weather[0].description;
+        $scope.date = data.data.dt;
+        $scope.icon = "http://openweathermap.org/img/w/" + data.data.weather[0].icon + ".png";
+
+          switch($scope.description){
+            case 'clear sky':{
+              $scope.weatherBackground = {
+                "background": "url('/app/clear.jpg')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'broken clouds':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'few clouds':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'mist':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'rain':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'scattered clouds':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'shower rain':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'snow':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            case 'thunderstorm':{
+              $scope.weatherBackground = {
+                "background": "url('')",
+                "background-size": "cover"
+              };
+              break;
+            }
+            default:
+            $scope.weatherBackground = {
+              "background": "url('')",
+              "background-size": "cover"
+            };
+            break;
+          }
+
+      });
+    }
+    $scope.fiveForecast = function() {
+      let searchCity = $scope.assetName;
+      let searchCountry = $scope.countryCode;
+      let apiKey = '8d1194589041958e3246e9d8334d1a8c';
+      $http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + searchCity + ',' + searchCountry + '&units=metric&cnt=5&APPID='+ apiKey).then(function(data) {
+        $scope.items = data.data.list;
+        $scope.forecastImg = '';
+
+        console.log($scope.forecastImg)
+        // $scope.image = '';
+        // $scope.image = $scope.items.forEach(function(image){
+        //   "http://openweathermap.org/img/w/" + image.weather[0].icon + ".png";
+        //   // $scope.image = images;
+        //   console.log(image)
+        //   return image;
+        // });
+
+        // $scope.image1 = "http://openweathermap.org/img/w/" + $scope.items[0].weather[0].icon + ".png";
+        // $scope.images = "http://openweathermap.org/img/w/" + $scope.items + weather[0].icon + ".png";
+        // console.log($scope.items)
+      });
+    }
+    $scope.parseDate = function (time) {
+      return new Date(time * 1000);
+    };
+  })
+</script>
+  <div ng-app="mcWeatherTestApp" ng-style="weatherBackground" ng-controller="mcWeatherTestController">
+    <h1 class="text-center">Momentum Cloud Weather Test</h1>
+    <div ng-if="!testIsDone">
+      <h2>Test requirements</h2>
+      <h3>These are the things we'd like to see when reviewing your code</h3>
+      <ol>
+        <li>The
+          <code>p.replace-me</code> tag in this document has been replaced with a
+          <a href="https://docs.angularjs.org/guide/component">AngularJS Component</a>
+        </li>
+        <li>Weather data loads directly from the
+          <a href="http://openweathermap.org/current">OpenWeatherMap API</a> on page load for a given city
+        </li>
+        <li>Dependency injection everywhere possible</li>
+        <li>API calls are encapsulated in
+          <a href="https://docs.angularjs.org/guide/services">AngularJS Services</a>
+        </li>
+        <li>Page has been styled and elements use
+          <a href="http://getbootstrap.com/">Bootstrap classes</a>
+        </li>
+        <li>Style overrides are done using
+          <a href="http://sass-lang.com/">SASS</a> (use the provided inline
+          <a href="https://github.com/medialize/sass.js/">SASS compiler</a> setup to make it easier)</li>
+        <li>Tests are provided for your component (any test is better than no test)</li>
+        <li>Add any libraries you'd like, and have fun! ☺</li>
+      </ol>
+    </div>
+
+
+
+    <div role="main" class="container theme-showcase">
+      <div class="" style="margin-top:90px;">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand">Search weather</a>
+            </div>
+
+            <!-- Search by City Name -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group" id="city">
+                  <input type="text" class="form-control" ng-model="assetName" placeholder="Enter city name..">
+                  <input type="text" class="form-control" ng-model="countryCode" placeholder="Enter country code..">
+                </div>
+                <button type="submit" class="btn btn-info" ng-click="searchWeather()">Submit</button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a>{{totalCount}} results</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div class="row">
+          <div class="col-sm-6 col-md-4" ng-cloak>
+            <div class="thumbnail">
+              <div class="media">
+                <!-- <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt="" style="max-width: 50px;">
+                  </a>
+                </div> -->
+                <div class="media-body">
+                  <h4 class="media-heading">{{city}}, {{country}} - {{parseDate(date)}}</h4>
+                  <img ng-src="{{icon}}"/>
+                  <h4><span class="label label-primary">{{temp}}°С</span></h4>
+                  <span>Forecast: {{main}}, {{description}}</span><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="fiveForecast()">
+        5 day Forecast
+      </button>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <div class="row">
+            <div class="col-sm-6 col-md-4" ng-repeat="item in items" ng-cloak>
+              <div class="thumbnail">
+                <div class="media">
+                  <div class="media-body">
+                    <h4 class="media-heading">{{city}}, {{country}} - {{item.dt_txt}}</h4>
+                    <img ng-src="{{forecastImg}}"/>
+                    <h4><span class="label label-primary">{{item.main.temp}}°С</span></h4>
+                    <span>Forecast: {{item.weather[0].main}}, {{item.weather[0].description}}</span><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
