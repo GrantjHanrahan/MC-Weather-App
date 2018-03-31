@@ -19,7 +19,7 @@
   </style>
 </head>
 
-<body ng-style="weatherBackground">
+<body ng-app="mcWeatherTestApp" ng-controller="mcWeatherTestController" ng-style="weatherBackground">
 
   <script type="text/javascript">
     // simple client side SASS compilation
@@ -33,7 +33,7 @@
     });
   </script>
 
-  <div ng-app="mcWeatherTestApp" ng-controller="mcWeatherTestController">
+  <div>
     <h1 class="text-center">Momentum Cloud Weather Test</h1>
     <div ng-if="!testIsDone">
       <h2>Test requirements</h2>
@@ -90,20 +90,21 @@
                 <div class="media-body">
                   <h4 class="media-heading">{{city}}, {{country}} - {{date}}</h4>
                   <img ng-src="{{icon}}" />
-                  <h4><span class="label label-primary">{{temp}}°С</span></h4>
-                  <span>Forecast: {{main}}, {{description}}</span><br>
+                  <h4><span class="label label-primary">Avg: {{temp}}°С</span>
+                    <span class="label label-warning">Min: {{min}}°С</span>
+                    <span class="label label-danger">Max: {{max}}°С</span></h4>
+                  <span>Forecast: {{main}} - {{description}}</span><br>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
       <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="fiveForecast()">
         Daily 3 hour forecast
       </button>
-      </p>
+
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
           <div class="row">
@@ -114,7 +115,7 @@
                     <h4 class="media-heading">{{city}}, {{country}} - {{item.dt_txt}}</h4>
                     <img ng-src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" />
                     <h4><span class="label label-primary">{{item.main.temp}}°С</span></h4>
-                    <span>Forecast: {{item.weather[0].main}}, {{item.weather[0].description}}</span><br>
+                    <span>Forecast: {{item.weather[0].main}} - {{item.weather[0].description}}</span><br>
                   </div>
                 </div>
               </div>

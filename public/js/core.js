@@ -15,16 +15,18 @@ app.controller('mcWeatherTestController', function($scope, $http) {
       $scope.city = data.data.name;
       $scope.country = data.data.sys.country;
       $scope.temp = data.data.main.temp;
+      $scope.min = data.data.main.temp_min;
+      $scope.max = data.data.main.temp_max;
       $scope.main = data.data.weather[0].main;
       $scope.description = data.data.weather[0].description;
       $scope.date = data.data.dt;
       $scope.icon = "http://openweathermap.org/img/w/" + data.data.weather[0].icon + ".png";
-
+      console.log(data.data)
       switch ($scope.description) {
         case 'clear sky':
           {
             $scope.weatherBackground = {
-              "background": "url('/public/clear.jpg')",
+              "background": "url('/images/clear.jpg')",
               "background-size": "cover"
             };
             break;
@@ -32,7 +34,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'broken clouds':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/broken-clouds.jpg')",
               "background-size": "cover"
             };
             break;
@@ -40,7 +42,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'few clouds':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/few-clouds.jpg')",
               "background-size": "cover"
             };
             break;
@@ -48,7 +50,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'mist':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/mist.jpg')",
               "background-size": "cover"
             };
             break;
@@ -56,7 +58,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'rain':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/rain.jpg')",
               "background-size": "cover"
             };
             break;
@@ -64,7 +66,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'scattered clouds':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/scat-clouds.jpg')",
               "background-size": "cover"
             };
             break;
@@ -72,7 +74,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'shower rain':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/light-rain.jpg')",
               "background-size": "cover"
             };
             break;
@@ -80,7 +82,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'snow':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/snow.jpg')",
               "background-size": "cover"
             };
             break;
@@ -88,14 +90,14 @@ app.controller('mcWeatherTestController', function($scope, $http) {
         case 'thunderstorm':
           {
             $scope.weatherBackground = {
-              "background": "url('')",
+              "background": "url('/images/thunder.jpg')",
               "background-size": "cover"
             };
             break;
           }
         default:
           $scope.weatherBackground = {
-            "background": "url('/public/clear.jpg')",
+            "background": "url('/images/weather.jpg')",
             "background-size": "cover"
           };
           break;
