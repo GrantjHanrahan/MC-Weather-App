@@ -61,8 +61,6 @@
       </ol>
     </div>
 
-
-
     <div role="main" class="container theme-showcase">
       <div class="" style="margin-top:90px;">
         <nav class="navbar navbar-default" id="searchBar">
@@ -72,10 +70,11 @@
             </div>
             <!-- Search by City Name -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <form class="navbar-form navbar-left" role="search">
+              <form class="navbar-form navbar-left form-inline" role="search">
                 <div class="form-group" id="city">
                   <input type="text" class="form-control" ng-model="assetName" placeholder="Enter city name.." required>
-                  <!-- <input type="text" class="form-control" ng-model="countryCode" placeholder="Enter country code.."> -->
+                  <!-- <input type="text" class="form-control" ng-model="countryCode" placeholder="Enter country code.."> id="inputCC"  -->
+                  <label for="inputCC">Country: </label>
                   <select class="form-control" ng-model="countryCode" id="inputCC" required>
                     <option value="AF">Afghanistan</option>
                   	<option value="AX">Åland Islands</option>
