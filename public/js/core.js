@@ -1,5 +1,3 @@
-
-
 const app = angular.module('mcWeatherTestApp', []);
 app.controller('mcWeatherTestController', function($scope, $http) {
   $scope.testIsDone = true;
@@ -21,8 +19,11 @@ app.controller('mcWeatherTestController', function($scope, $http) {
       $scope.date = moment(data.data.dt).format("dddd, MMM Do");
       $scope.sunrise = moment(data.data.sys.sunrise).format("HH:mm:ss");
       $scope.sunset = moment(data.data.sys.sunset).format("HH:mm:ss");
+      $scope.humidity = data.data.main.humidity;
       $scope.icon = "http://openweathermap.org/img/w/" + data.data.weather[0].icon + ".png";
       console.log(data.data)
+
+      // change background-image according to weather description
       switch ($scope.description) {
         case 'clear sky':
           {
@@ -107,7 +108,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
     });
     // add a .error function
     // .error(function(data, status, headers, config) {
-    //     // Log an error in the browser's console.
+    //      Log an error in the browser's console.
     //     $log.error('Could not retrieve data from ' + url);
     //   });
   }
@@ -122,12 +123,12 @@ app.controller('mcWeatherTestController', function($scope, $http) {
 
     });
   }
-  $scope.parseDate = function (time) {
+  $scope.parseDate = function(time) {
     let dates = new Date(time * 1000);
     let hours = dates.getHours();
     let minutes = "0" + dates.getMinutes();
     let seconds = "0" + dates.getSeconds();
-    let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    let formattedTime = hours + ':' + minutes.substr(-2);
     return formattedTime;
   };
 });
