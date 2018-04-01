@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
@@ -33,7 +33,7 @@
     });
   </script>
 
-  <div>
+  <div ng-cloak>
     <h1 class="text-center">Momentum Cloud Weather Test</h1>
     <div ng-if="!testIsDone">
       <h2>Test requirements</h2>
@@ -77,23 +77,25 @@
                   <input type="text" class="form-control" ng-model="assetName" placeholder="Enter city name..">
                   <input type="text" class="form-control" ng-model="countryCode" placeholder="Enter country code..">
                 </div>
-                <button type="submit" class="btn btn-info" ng-click="searchWeather()">Submit</button>
+                <button type="submit" class="btn btn-info" ng-click="searchWeather()" >Submit</button>
               </form>
             </div>
           </div>
         </nav>
 
-        <div class="row">
+        <div class="row" ng-hide="!showForecast">
           <div class="col-sm-6 col-md-4" ng-cloak>
             <div class="thumbnail">
               <div class="media">
                 <div class="media-body">
-                  <h4 class="media-heading">{{city}}, {{country}} - {{date}}</h4>
-                  <img ng-src="{{icon}}" />
+                  <h4 class="media-heading">{{city}}, {{country}}  {{date}}</h4>
+                  <img ng-src="{{icon}}" style="max-width: 50px;"/>
                   <h4><span class="label label-primary">Avg: {{temp}}°С</span>
                     <span class="label label-warning">Min: {{min}}°С</span>
                     <span class="label label-danger">Max: {{max}}°С</span></h4>
                   <span>Forecast: {{main}} - {{description}}</span><br>
+                  <span>Sunrise: {{sunrise}} - Sunset: {{sunset}}</span><br>
+
                 </div>
               </div>
             </div>
@@ -101,7 +103,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="fiveForecast()">
+      <button class="btn btn-primary" type="submit" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-click="fiveForecast()" id="fiveForecast">
         Daily 3 hour forecast
       </button>
 
@@ -112,8 +114,8 @@
               <div class="thumbnail">
                 <div class="media">
                   <div class="media-body">
-                    <h4 class="media-heading">{{city}}, {{country}} - {{item.dt_txt}}</h4>
-                    <img ng-src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" />
+                    <h4 class="media-heading">{{city}} - {{parseDate(item.dt)}}</h4>
+                    <img ng-src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" style="max-width: 50px;"/>
                     <h4><span class="label label-primary">{{item.main.temp}}°С</span></h4>
                     <span>Forecast: {{item.weather[0].main}} - {{item.weather[0].description}}</span><br>
                   </div>
@@ -128,5 +130,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.21.0/moment.min.js"></script>
 </body>
 </html>

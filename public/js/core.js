@@ -3,11 +3,10 @@
 const app = angular.module('mcWeatherTestApp', []);
 app.controller('mcWeatherTestController', function($scope, $http) {
   $scope.testIsDone = true;
-  $scope.items = {};
   $scope.assetName = '';
   $scope.countryCode = '';
-  $scope.totalCount = 0;
   $scope.searchWeather = function() {
+    $scope.showForecast = true; // show city-forecast on click
     let searchCity = $scope.assetName;
     let searchCountry = $scope.countryCode;
     let apiKey = '8d1194589041958e3246e9d8334d1a8c';
@@ -19,7 +18,9 @@ app.controller('mcWeatherTestController', function($scope, $http) {
       $scope.max = data.data.main.temp_max;
       $scope.main = data.data.weather[0].main;
       $scope.description = data.data.weather[0].description;
-      $scope.date = data.data.dt;
+      $scope.date = moment(data.data.dt).format("dddd, MMM Do");
+      $scope.sunrise = moment(data.data.sys.sunrise).format("HH:mm:ss");
+      $scope.sunset = moment(data.data.sys.sunset).format("HH:mm:ss");
       $scope.icon = "http://openweathermap.org/img/w/" + data.data.weather[0].icon + ".png";
       console.log(data.data)
       switch ($scope.description) {
@@ -104,17 +105,29 @@ app.controller('mcWeatherTestController', function($scope, $http) {
       }
 
     });
+    // add a .error function
+    // .error(function(data, status, headers, config) {
+    //     // Log an error in the browser's console.
+    //     $log.error('Could not retrieve data from ' + url);
+    //   });
   }
   $scope.fiveForecast = function() {
+    $scope.items = {};
     let searchCity = $scope.assetName;
     let searchCountry = $scope.countryCode;
     let apiKey = '8d1194589041958e3246e9d8334d1a8c';
     $http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + searchCity + ',' + searchCountry + '&units=metric&cnt=5&APPID=' + apiKey).then(function(data) {
       $scope.items = data.data.list;
-      $scope.forecastImg = '';
+      console.log($scope.items);
+
     });
   }
-  $scope.parseDate = function(time) {
-    return new Date(time * 1000);
+  $scope.parseDate = function (time) {
+    let dates = new Date(time * 1000);
+    let hours = dates.getHours();
+    let minutes = "0" + dates.getMinutes();
+    let seconds = "0" + dates.getSeconds();
+    let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime;
   };
 });

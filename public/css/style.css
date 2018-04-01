@@ -1,4 +1,4 @@
-body {
+/* body {
   padding: 0px;
   margin: 0px;
   -webkit-animation: bgcolor 20s infinite;
@@ -27,8 +27,12 @@ body {
   100% {
     background-color: #864cbf
   }
-}
+} */
 
 #searchBar{
   width: 60vw;
+}
+
+#fiveForecast{
+  margin-bottom: 3%;
 }

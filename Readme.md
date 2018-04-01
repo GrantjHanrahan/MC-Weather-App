@@ -17,6 +17,6 @@ e.g. The weather forecast for Sydney is Sunny
 
 ---- Approach ----
 
-Languages/ Frameworks: Angular, Node.js, Express.js
+Languages/ Frameworks: Angular, Node.js, Express.js, Moment.js, Bootstrap, Sass
 
 To do: Add testing for Angular Components
