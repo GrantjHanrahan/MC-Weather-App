@@ -9,6 +9,7 @@ app.controller('mcWeatherTestController', function($scope, $http) {
     let searchCountry = $scope.countryCode;
     let apiKey = '8d1194589041958e3246e9d8334d1a8c';
     $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + searchCity + ',' + searchCountry + '&units=metric&APPID=' + apiKey).then(function(data) {
+      $scope.valid = true;
       $scope.city = data.data.name;
       $scope.country = data.data.sys.country;
       $scope.temp = data.data.main.temp;

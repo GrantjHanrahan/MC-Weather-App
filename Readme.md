@@ -21,10 +21,22 @@ e.g. The weather forecast for Sydney is Sunny
 Languages/ Frameworks: Angular, Node.js, Express.js, Moment.js, Bootstrap, Sass
 
 Testing: Jasmine, Karma
+- To run test from Command Line - karma start
 
-To do:
-- Add testing for Angular Component
-- Validate user input
+---- Project Layout ----
+Node server
+- server.js
+
+Main Angular JS, HTML, CSS
+- public./
+
+- tests located in public - js - core.spec.js
+
+---- To DO ----
+- Jasmine test of Http request is not passing as intended. I was not sure of how to structure and run this test particularly in regards to using $httpBackend.whenGET or $httpBackend.expectGET and what the URL provided should be. The current error is - 	TypeError: scope.searchWeather is not a function at <Jasmine>
+
+- Validate user input through html form.
+- Replicate the project or something similar in VS Code, using TypeScript
 
 ---- Challenges ----
 
