@@ -1,5 +1,3 @@
-
-
 // test of a test
 describe('example test', function() {
   it('should be true', function() {
@@ -7,17 +5,25 @@ describe('example test', function() {
   });
 });
 
-//
-describe('searchWeather', function(){
+// Test to confirm that $scope.testIsDone has been set to true
+describe('mcWeatherTestApp', function() {
+  var scope,
+    controller;
+  beforeEach(function() {
+    module('mcWeatherTestApp');
+  });
 
-  beforeEach(angular.mock.module('mcWeatherTestApp'));
+  describe('mcWeatherTestController', function() {
 
-  beforeEach(inject(function(_formattedTime_){
-    formattedTime = _formattedTime_;
-  }))
+    beforeEach(inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      controller = $controller('mcWeatherTestController', {'$scope': scope});
 
+    }));
 
-  it('should exist', function(){
-    expect(formattedTime).toBeDefined();
+    it('sets the name', function() {
+      expect(scope.testIsDone).toBe(true);
+    });
+
   });
 });
