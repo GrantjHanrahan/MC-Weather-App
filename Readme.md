@@ -33,13 +33,6 @@ Main Angular JS, HTML, CSS
 - tests located in public - js - core.spec.js
 
 ---- To DO ----
-- Jasmine test of Http request is not passing as intended. I was not sure of how to structure and run this test particularly in regards to using $httpBackend.whenGET or $httpBackend.expectGET and what the URL provided should be. The current error is - 	TypeError: scope.searchWeather is not a function at <Jasmine>
-
+- Jasmine test of Http request is not passing as intended.
 - Validate user input through html form.
 - Replicate the project or something similar in VS Code, using TypeScript
-
----- Challenges ----
-
-- Building the Angular app structure with Node
-- Creating two separate functions for different api calls (weather data for a city, 3 hour forecast for the same city) then rendering that data.
-- Implementing a Component Test was the most difficult aspect of the project. This is my first time writing Angular tests and so I left this part of the project to the end. This was a mistake as I had to adapt the test to the existing component which made the process more difficult/ foreign.

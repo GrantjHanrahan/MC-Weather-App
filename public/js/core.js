@@ -107,11 +107,6 @@ app.controller('mcWeatherTestController', function($scope, $http) {
       }
 
     });
-    // add a .error function
-    // .error(function(data, status, headers, config) {
-    //      Log an error in the browser's console.
-    //     $log.error('Could not retrieve data from ' + url);
-    //   });
   }
   $scope.fiveForecast = function() {
     $scope.items = {};
