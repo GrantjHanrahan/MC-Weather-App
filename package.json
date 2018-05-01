@@ -12,17 +12,17 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
-    "moment": "^2.22.0",
-    "nodemon": "^1.17.2"
+    "moment": "^2.22.1",
+    "nodemon": "^1.17.3"
   },
   "devDependencies": {
     "@uirouter/angularjs": "^1.0.3",
-    "angular": "^1.6.9",
-    "angular-mocks": "^1.6.9",
+    "angular": "^1.6.10",
+    "angular-mocks": "^1.6.10",
     "jasmine-core": "^3.1.0",
-    "karma": "^2.0.0",
+    "karma": "^2.0.2",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.1",
-    "nock": "^9.2.3"
+    "nock": "^9.2.5"
   }
 }
